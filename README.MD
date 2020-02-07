@@ -1,4 +1,4 @@
-[![Python3](https://img.shields.io/badge/Python-3-green.svg?style=flat-square)](https://github.com/CRO-THEHACKER/fsociety3) ![OS](https://img.shields.io/badge/Tested%20On-Linux%20|%20OSX-yellowgreen.svg?style=flat-square)
+[![Python3](https://img.shields.io/badge/Python-3-green.svg?style=flat-square)](https://www.python.org/doc/sunset-python-2/) ![OS](https://img.shields.io/badge/Tested%20On-Linux%20|%20OSX-yellowgreen.svg?style=flat-square)
 # About the tool
 
 WiFi Crusher. This is like-a LazyScript by Arios Mela Chronios, but with the feel of the Rapid7's metasploit-framework.
