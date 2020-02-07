@@ -1,7 +1,7 @@
 [![Python3](https://img.shields.io/badge/Python-3-green.svg?style=flat-square)](https://www.python.org/doc/sunset-python-2/) ![OS](https://img.shields.io/badge/Tested%20On-Linux%20|%20OSX-yellowgreen.svg?style=flat-square)
 # About the tool
 
-WiFi Crusher. This is like-a LazyScript by Arios Mela Chronios, but with the feel of the Rapid7's metasploit-framework.
+WiFi Crusher. This is like-a LazyScript by @arismelachroinos, but with the feel of the @rapid7 metasploit-framework.
                                                                        
 ## WARNING
 I am not responsible, for any misuse or abuse of this tool(pranks, making trouble for Point-On-Sale terminals, etc.) 
