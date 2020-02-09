@@ -16,7 +16,7 @@ lots, I mean... Lots of easter eggs, so I suggest to poke around, or look at the
 eggs, or bugs. If you found a bug, please, send over in an "Issue" tab. I'll try to fix bugs as soon as                
 possible.                                                                                                              
 
-## Instalation
+## Installation
 **Clone the tool:** git clone https://github.com/inquisition-musician/wifi_crusher                                         
 
 **Download Python3:** - For Debian-based: sudo apt-get install python3
