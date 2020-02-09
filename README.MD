@@ -33,3 +33,5 @@ possible.
 - Shell is now executed through "/usr/bin/bash/".
 - Added check for KeyboardInterrupt(Ctrl + C). If hit, it exits.
 - Corrected mistakes in names(e. g. Arios Mela Chronios is now Aris Mela Chroinos)
+- Added disable monitor mode on-exit.
+- Removed unused RandomStream variable.
