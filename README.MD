@@ -30,7 +30,7 @@ possible.
 
 ### Updates
 - Added root check, since aircrack-ng requiers root.
-- Shell is now executed through "/usr/bin/bash/".
+- Shell is now executed through "/usr/bin/bash/". So, you can use this tool for gaining root access.)
 - Added check for KeyboardInterrupt(Ctrl + C). If hit, it exits.
 - Corrected mistakes in names(e. g. Arios Mela Chronios is now Aris Mela Chroinos)
 - Added disable monitor mode on-exit.
