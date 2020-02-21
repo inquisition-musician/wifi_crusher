@@ -29,6 +29,17 @@ possible.
 **Run the tool:** ./wifi_crusher
 
 ### Updates
+v.1.2
+- Removed unused functions in the menu
+- Added auto-monitor mode on menu selections from 1 to 5
+- Dependecy check is redone. so, you can run the script without any problem.
+- Added new logo. And, like quotes, it's random.
+- Changed the way you run shell commands.
+- Removed useless tips in help box, since those features are removed.
+- If you pick "S" for shell, it will warn you, you should use "os <command>"
+- Removed "Reload" debugging feature. It will be completeley random.
+- Redone the way menu loads.
+v.1.1
 - Added root check, since aircrack-ng requiers root.
 - Shell is now executed through "/usr/bin/bash/". So, you can use this tool for gaining root access.)
 - Added check for KeyboardInterrupt(Ctrl + C). If hit, it exits.
