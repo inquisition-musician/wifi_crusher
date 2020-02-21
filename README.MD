@@ -39,6 +39,7 @@ v.1.2
 - If you pick "S" for shell, it will warn you, you should use "os <command>"
 - Removed "Reload" debugging feature. It will be completeley random.
 - Redone the way menu loads.
+
 v.1.1
 - Added root check, since aircrack-ng requiers root.
 - Shell is now executed through "/usr/bin/bash/". So, you can use this tool for gaining root access.)
